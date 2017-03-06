@@ -1,0 +1,101 @@
+
+json_schema: 'data/json_schema'
+
+# Currently not used >
+proxy_url: '127.0.0.1'
+proxy_port: 28080
+rest_timeout: 60
+# < Currently not used
+
+
+webpage_client:
+  default_client: browser
+  base_url: http://development.test.com
+  selenium:
+    browser: FIREFOX
+  phantom:
+  headless:
+
+#
+# The screens data compresses quite alot of information into one table.
+# First of all it provides a mapping between a 'human readable' screen name 
+# and all of this detailed data.
+# 
+#   url: This is the relative URL to access this given page
+#   title: The text that we expect to see in the title of the page, 
+#          this is checked by the Cucumber framework, so must be exact
+#   check_for_ids: The list of CSS ids that need to be checked to be sure
+#                  we are really on this page
+#   get_here_by: How do we expect to arrive at this page, GET or POST
+#
+#   form_data: What keys for form data do we need to supply for a POST
+#      
+screens:
+  Search:
+    url: /
+    title: Search
+    check_for_ids: 
+        - Search Header
+        - Name Label
+        - Name Input
+        - ID Input
+    get_here_by: GET
+    
+  User Details:
+    url: /user
+    title: User details
+    check_for_ids:
+        - User Details Header
+    get_here_by: POST
+    form_data:
+        - Name
+        - ID
+
+#
+# Look up table for user friendly names for CSS element IDs that are 
+# used for a specific lookup.
+#
+# This table is also used for element groups (below) 
+#             
+element_ids:
+    Search Button: submit-search-button
+    Search Header: set-interest-hd
+    Name Label: label-name
+    Name Input: input-name
+    ID Label: label-id
+    ID Input: input-id
+    Filter by Three Months: radio-3-months
+    Filter by Twelve Months: radio-12-months
+    Filter by All Months: radio-all-months
+    Gender Male: radio-male
+    Gender Female: radio-female
+    First Name: label-firstname
+    Last Name: label-lastname
+    Day of Birth: label-dob-day
+    Month of Birth: label-dob-month
+    Year of Birth: label-dob-year
+
+
+element_groups:
+    Filters by Timeframe:
+        - Filter by Three Months
+        - Filter by All Months
+        - Filter by Twelve Months
+        
+    Fields for User Details:
+        - Gender Male
+        - Gender Female
+        - First Name
+        - Last Name
+        - Day of Birth
+        - Month of Birth
+        - Year of Birth
+  
+
+messages:
+    Enter the ID in the Correct Format: 'Enter a user ID in the correct format'
+    
+
+test_data:
+    Test Name 0001: Rincewind
+                
